@@ -1,0 +1,62 @@
+<%- include('header') %>
+
+<div class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to My Blog</h1>
+            <p class="hero-subtitle">Share your thoughts, ideas, and experiences with the world</p>
+            <a href="/create" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Create New Post
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="posts-section">
+        <h2 class="section-title">Latest Posts</h2>
+        
+        <% if (posts.length === 0) { %>
+            <div class="empty-state">
+                <i class="fas fa-blog"></i>
+                <h3>No posts yet</h3>
+                <p>Be the first to create a blog post!</p>
+                <a href="/create" class="btn btn-primary">Create First Post</a>
+            </div>
+        <% } else { %>
+            <div class="posts-grid">
+                <% posts.forEach(post => { %>
+                    <article class="post-card">
+                        <div class="post-header">
+                            <h3 class="post-title">
+                                <a href="/post/<%= post.id %>"><%= post.title %></a>
+                            </h3>
+                            <div class="post-meta">
+                                <span class="post-author">
+                                    <i class="fas fa-user"></i>
+                                    <%= post.author %>
+                                </span>
+                                <span class="post-date">
+                                    <i class="fas fa-calendar"></i>
+                                    <%= post.date %>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <p class="post-excerpt"><%= post.excerpt %></p>
+                        </div>
+                        <div class="post-footer">
+                            <a href="/post/<%= post.id %>" class="btn btn-outline">
+                                Read More
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                <% }); %>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<%- include('footer') %>
